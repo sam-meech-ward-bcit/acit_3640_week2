@@ -79,9 +79,9 @@ app.get("/grade", async (req, res) => {
       throw "You need to provide a NGINX_IP";
     }
     let data = {}
-    data.ec2Details = ec2Details();
-    data.nginx = nginxTest();
-    data.mysql = mysqlTest();
+    data.ec2Details = await ec2Details();
+    data.nginx = await nginxTest();
+    data.mysql = await mysqlTest();
     console.log(data);
     res.send(data);
   } catch (err) {
