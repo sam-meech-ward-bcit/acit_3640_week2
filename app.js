@@ -70,6 +70,8 @@ async function mysqlTest() {
   }
 }
 
+var jwt = require("jsonwebtoken")
+
 app.get("/grade", async (req, res) => {
   try {
     if (!mysqlIP) {
@@ -83,7 +85,8 @@ app.get("/grade", async (req, res) => {
     data.nginx = await nginxTest();
     data.mysql = await mysqlTest();
     console.log(data);
-    res.send(data);
+    const token = jwt.sign(data, "acit_3640_week_2");
+    res.send(token);
   } catch (err) {
     console.log(err);
     res.send(err);
